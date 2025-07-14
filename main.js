@@ -11,6 +11,6 @@ if (currentPage.includes("/pages/login.html")) {
   ProjectController.init();
 } else if (currentPage.includes("/pages/tarefas.html")) {
   TaskController.init();
-} else if (currentPage.includes("/pages/calendario.html")) {
+} else if (currentPage.includes("/pages/agenda.html")) {
   EventController.init();
 }
