@@ -2,6 +2,8 @@
 import { UserModel } from "../models/UserModel.js";
 import { AuthView } from "../views/AuthView.js";
 
+localStorage.setItem("usuarioLogado", JSON.stringify(user));
+
 export class AuthController {
   static init() {
     AuthView.bindFormEvents(this.handleLogin, this.handleRegister);
