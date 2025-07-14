@@ -1,1 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Gestão de Projetos</title>
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
+  <style>
+    :root {
+      --bg-main: #f5f7fa;
+      --bg-card: #ffffff;
+      --text-main: #111;
+      --text-muted: #555;
+      --sidebar-bg: #1e1e2f;
+      --sidebar-text: #ccc;
+      --sidebar-active: #2e2e42;
+    }
+
+    .dark-mode {
+      --bg-main: #1a1b1e;
+      --bg-card: #2c2f36;
+      --text-main: #f1f1f1;
+      --text-muted: #ccc;
+      --sidebar-bg: #121212;
+      --sidebar-text: #aaa;
+      --sidebar-active: #2e2e42;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background 0.3s;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--sidebar-text);
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      background-color: var(--sidebar-active);
+      color: #fff;
+    }
+
+    .menu-item i {
+      margin-right: 10px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+      background-color: var(--bg-main);
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .main h1 {
+      font-size: 2rem;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-main);
+      transition: color 0.3s;
+    }
+
+    #searchInput {
+      padding: 10px;
+      width: 60%;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    #projectList {
+      margin-top: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    #addProjectBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    #projectModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+    }
+
+    #projectModal .modal-content {
+      background: var(--bg-card);
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      color: var(--text-main);
+    }
+
+    #projectModal input,
+    #projectModal select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    #projectModal button {
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <h2>Gestão</h2>
+      <a href="index.html" class="menu-item"><i class='bx bx-grid-alt'></i> Dashboard</a>
+      <a href="projeto.html" class="menu-item active"><i class='bx bx-folder'></i> Projetos</a>
+      <a href="agenda.html" class="menu-item"><i class='bx bx-calendar'></i> Agenda</a>
+      <a href="chat.html" class="menu-item"><i class='bx bx-group'></i> Mensagens</a>
+      <a href="configuracoes.html" class="menu-item"><i class='bx bx-cog'></i> Configurações</a>
+    </div>
+    <div>
+      <a href="#" class="menu-item"><i class='bx bx-log-out'></i> Sair</a>
+    </div>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="main">
+    <div class="main-header">
+      <h1>Projetos</h1>
+      <button class="theme-toggle" id="themeToggle">
+        <i class='bx bx-moon' id="themeIcon"></i>
+      </button>
+    </div>
+
+    <!-- Pesquisa e Filtro -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <input type="text" placeholder="Pesquisar projeto..." id="searchInput" />
+      <select>
+        <option>Filtrar por...</option>
+        <option>Mais recentes</option>
+        <option>Mais antigos</option>
+      </select>
+    </div>
+
+    <!-- Lista de projetos -->
+    <div id="projectList">
+      <p id="emptyMessage">Nenhum projeto adicionado ainda.</p>
+    </div>
+  </main>
+
+  <!-- Botão flutuante -->
+  <button id="addProjectBtn">+</button>
+
+  <!-- Modal -->
+  <div id="projectModal">
+    <div class="modal-content">
+      <h2>Novo Projeto</h2>
+      <label>Nome do Projeto:</label>
+      <input type="text" id="projName" />
+      <label>Data de Início:</label>
+      <input type="date" id="projStart" />
+      <label>Data de Fim:</label>
+      <input type="date" id="projEnd" />
+      <label><input type="checkbox" id="projTasks" /> Incluir tarefas</label><br /><br />
+      <label>Membros:</label>
+      <input type="text" id="projMembers" placeholder="Ex: Ana, João..." />
+      <div style="text-align: right;">
+        <button onclick="closeModal()">Cancelar</button>
+        <button onclick="createProject()">Criar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const modal = document.getElementById('projectModal');
+    const addProjectBtn = document.getElementById('addProjectBtn');
+    const projectList = document.getElementById('projectList');
+    const emptyMessage = document.getElementById('emptyMessage');
+
+    const userTheme = localStorage.getItem('theme');
+    if (userTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeIcon.className = 'bx bx-sun';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      themeIcon.className = isDark ? 'bx bx-sun' : 'bx bx-moon';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    addProjectBtn.onclick = () => modal.style.display = 'flex';
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    function createProject() {
+      const name = document.getElementById('projName').value;
+      const start = document.getElementById('projStart').value;
+      const end = document.getElementById('projEnd').value;
+      const tasks = document.getElementById('projTasks').checked;
+      const members = document.getElementById('projMembers').value;
+
+      if (!name || !start || !end) {
+        alert('Preencha os campos obrigatórios.');
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.innerHTML = `
+        <h3>${name}</h3>
+        <p><strong>Início:</strong> ${start} | <strong>Fim:</strong> ${end}</p>
+        <p><strong>Tarefas:</strong> ${tasks ? 'Sim' : 'Não'}</p>
+        <p><strong>Membros:</strong> ${members}</p>
+      `;
+
+      projectList.appendChild(card);
+      emptyMessage.style.display = 'none';
+      closeModal();
+
+      document.getElementById('projName').value = '';
+      document.getElementById('projStart').value = '';
+      document.getElementById('projEnd').value = '';
+      document.getElementById('projTasks').checked = false;
+      document.getElementById('projMembers').value = '';
+    }
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  </script>
+</body>
+  </html>
