@@ -14,10 +14,11 @@ function verificarAutenticacao() {
   }
 
   if (user && paginaPublica) {
-    // já está logado e tentando voltar ao login
     window.location.href = "projetos.html";
   }
 }
+
+verificarAutenticacao();
 
 const currentPage = window.location.pathname;
 
@@ -29,5 +30,4 @@ if (currentPage.includes("/pages/login.html")) {
   TaskController.init();
 } else if (currentPage.includes("/pages/agenda.html")) {
   EventController.init();
-}
-
+    }
