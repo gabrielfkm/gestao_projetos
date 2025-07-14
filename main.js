@@ -32,6 +32,8 @@ if (currentPage.includes("/pages/login.html")) {
   TaskController.init();
 } else if (currentPage.includes("/pages/agenda.html")) {
   EventController.init();
+} else if (currentPage.includes("/pages/projeto.html")) {
+  TaskController.init();
 }
 
 // 🚪 Suporte ao botão de logout (em qualquer página protegida)
