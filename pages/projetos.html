@@ -222,22 +222,27 @@
 
   <!-- Modal -->
   <div id="projectModal">
-    <div class="modal-content">
-      <h2>Novo Projeto</h2>
+    <form id="form-projeto">
       <label>Nome do Projeto:</label>
-      <input type="text" id="projName" />
+      <input type="text" name="nome" required />
       <label>Data de Início:</label>
-      <input type="date" id="projStart" />
+      <input type="date" name="inicio" required />
       <label>Data de Fim:</label>
-      <input type="date" id="projEnd" />
-      <label><input type="checkbox" id="projTasks" /> Incluir tarefas</label><br /><br />
+      <input type="date" name="fim" required />
+      <label><input type="checkbox" name="tarefas" /> Incluir tarefas</label><br /><br />
       <label>Membros:</label>
-      <input type="text" id="projMembers" placeholder="Ex: Ana, João..." />
+      <input type="text" name="membros" />
+      <label>Prioridade:</label>
+      <select name="prioridade">
+        <option>Alta</option>
+        <option>Média</option>
+        <option>Baixa</option>
+      </select>
       <div style="text-align: right;">
-        <button onclick="closeModal()">Cancelar</button>
+        <button type="button" onclick="closeModal()">Cancelar</button>
         <button type="submit">Criar</button>
       </div>
-    </div>
+    </form>
   </div>
 
   <script>
