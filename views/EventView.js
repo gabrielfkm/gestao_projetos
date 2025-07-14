@@ -11,10 +11,8 @@ export class EventView {
     const year = dataAtual.getFullYear();
     const month = dataAtual.getMonth();
 
-    // Cabeçalho dias da semana - deve ser fixo, fora do grid de dias
+    // Cabeçalho dias da semana
     const diasSemana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-    // Você pode criar um container separado para os dias da semana, ou colocar no CSS grid usando grid-template-rows, etc.
-    // Aqui vamos criar um elemento separadamente para cabeçalho:
     let headerEl = document.getElementById("diasSemanaHeader");
     if (!headerEl) {
       headerEl = document.createElement("div");
@@ -36,25 +34,24 @@ export class EventView {
     const primeiroDia = new Date(year, month, 1).getDay();
 
     // Ajustar para segunda-feira = 0, domingo = 6
-    // (se sua semana começa na segunda)
     let deslocamento = primeiroDia - 1;
     if (deslocamento < 0) deslocamento = 6;
 
     const ultimoDia = new Date(year, month + 1, 0).getDate();
 
-    // Ajustar grid para 7 colunas
+    // Configura grid do calendário
     calendarEl.style.display = "grid";
     calendarEl.style.gridTemplateColumns = "repeat(7, 1fr)";
     calendarEl.style.gap = "10px";
 
-    // Criar divs vazias para deslocar o primeiro dia
+    // Divs vazias para deslocar o primeiro dia
     for (let i = 0; i < deslocamento; i++) {
       const empty = document.createElement("div");
       empty.className = "empty";
       calendarEl.appendChild(empty);
     }
 
-    // Criar os dias do mês
+    // Dias do mês
     for (let dia = 1; dia <= ultimoDia; dia++) {
       const dataStr = `${year}-${month + 1}-${dia}`;
       const diaEl = document.createElement("div");
@@ -82,9 +79,9 @@ export class EventView {
       calendarEl.appendChild(diaEl);
     }
 
-    // Atualiza o título do mês e ano
+    // Atualiza título do mês e ano
     const nomesMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                         'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     monthYearEl.textContent = `${nomesMeses[month]} ${year}`;
   }
-}
+  }
