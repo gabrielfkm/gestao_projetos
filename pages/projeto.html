@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes do Projeto</title>
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      color: #111;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #2c2c3d;
+      color: white;
+    }
+
+    .main {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .projeto-info {
+      margin-bottom: 30px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .tarefa-card {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border-left: 5px solid #007bff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tarefa-card.concluida {
+      border-left-color: green;
+      opacity: 0.7;
+      text-decoration: line-through;
+    }
+
+    .form-tarefa {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .form-tarefa input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-tarefa button {
+      padding: 10px 15px;
+      background: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+
+    #btnVoltar {
+      margin-top: 20px;
+      display: inline-block;
+      background: #444;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .tarefa-card button {
+      background: #dc3545;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .tarefa-card input[type="checkbox"] {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>Detalhes do Projeto</h1>
+    <a href="projetos.html" id="btnVoltar"><i class='bx bx-left-arrow-alt'></i> Voltar</a>
+  </header>
+
+  <main class="main">
+    <section class="projeto-info" id="projetoInfo">
+      <h2 id="projetoNome">Projeto</h2>
+      <p><strong>Período:</strong> <span id="projetoDatas"></span></p>
+      <p><strong>Membros:</strong> <span id="projetoMembros"></span></p>
+    </section>
+
+    <section>
+      <h3>Tarefas</h3>
+      <div id="listaTarefas"></div>
+
+      <form id="formTarefa" class="form-tarefa">
+        <input type="text" name="descricao" placeholder="Nova tarefa..." required />
+        <button type="submit">Adicionar</button>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="../main.js"></script>
+</body>
+  </html>
