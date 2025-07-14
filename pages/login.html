@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Cadastro - Gestão de Projetos</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #1f1f2e;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background: #2c2c3d;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .tab-buttons {
+      display: flex;
+    }
+
+    .tab-buttons button {
+      flex: 1;
+      padding: 15px;
+      background: #2c2c3d;
+      color: #ccc;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .tab-buttons button.active {
+      background: #3f3f5c;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .form-container {
+      transition: transform 0.5s ease;
+      width: 200%;
+      display: flex;
+    }
+
+    form {
+      width: 50%;
+      padding: 20px;
+    }
+
+    form h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background: #444;
+      color: #fff;
+    }
+
+    button.submit-btn {
+      width: 100%;
+      padding: 10px;
+      background: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button.submit-btn:hover {
+      background: #45a049;
+    }
+
+    .forms-wrapper {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #authMessage {
+      text-align: center;
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tab-buttons">
+      <button id="toLogin" class="active">Login</button>
+      <button id="toRegister">Cadastro</button>
+    </div>
+    <div class="forms-wrapper">
+      <div class="form-container">
+        <!-- Login Form -->
+        <form id="loginForm">
+          <h2>Entrar</h2>
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="password" name="senha" placeholder="Senha" required />
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm">
+          <h2>Cadastrar</h2>
+          <input type="text" name="nome" placeholder="Nome Completo" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="password" name="senha" placeholder="Senha" required />
+          <input type="password" name="confirmar" placeholder="Confirmar Senha" required />
+          <button type="submit" class="submit-btn">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+    <div id="authMessage"></div>
+  </div>
+
+  <script type="module" src="../main.js"></script>
+</body>
+  </html>
